@@ -8,7 +8,7 @@
     display: none;
   }
   h1 {
-    font-family: 'Charm', cursive;
+    font-family: 'Charm-Bold', cursive;
     font-size: 7vw;
     text-align: center;
     position: absolute;
@@ -21,7 +21,8 @@
        -moz-text-stroke-color: white;
     -webkit-text-stroke-color: white;
        -moz-text-stroke-width: 1px; /* have to make this 1px since Chrome can't handle paint-order :( */
-    -webkit-text-stroke-width: 1px; /* ALSO, it does not actually do 1px 🙄 */
+    -webkit-text-stroke-width: 2px; /* ALSO, it does not actually do 1px in Chrome 🙄 */
+    text-stroke-width:         1px;
     paint-order: stroke fill;
   }
   body {
@@ -98,7 +99,8 @@
   </style>
 </head>
 
-<link href="Charm/Charm-Regular.ttf" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Charm" rel="stylesheet">
+<!-- <link href="Charm/Charm-Regular.ttf" rel="stylesheet"> -->
 
 <button id="play" disabled>Play</button>
 
@@ -113,12 +115,12 @@
 
  <script>
   const URL = './Holly%20Jolly%20Christmas%20Lyrics%20-%20Burl%20Ives-nVMCUtsmWmQ.mp3'
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext()
 
   window.fetch(URL)
     .then(response => response.arrayBuffer())
-    .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
-    .then(audioBuffer => {
+    .then(arrayBuffer => context.decodeAudioData(arrayBuffer, audioBuffer => {
       play.disabled = false
       play.onclick = () => {
         const source = context.createBufferSource()
@@ -129,5 +131,5 @@
         contents.classList.remove('fucking-chrome')
         contents.classList.add('playing')
       }
-    })
+    }))
  </script>

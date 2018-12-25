@@ -9,18 +9,20 @@
   }
   h1 {
     font-family: 'Charm', cursive;
+    font-size: 7vw;
     text-align: center;
     position: absolute;
+    color: red;
     z-index: 2;
     width: 100%;
-    paint-order: stroke fill; /* works in Safari, not Chrome... which happened like 3x while making this 🙄 */
-
-    transform: scaleX(0.5) scaleY(0.5);
-    filter: url(#filter);
-    -webkit-filter: url(#filter);
-    color: red;
-    fill: blue;
-    font-size: 140px;
+    font-weight: bold;
+       -moz-text-fill-color:   red;
+    -webkit-text-fill-color:   red;
+       -moz-text-stroke-color: white;
+    -webkit-text-stroke-color: white;
+       -moz-text-stroke-width: 1px; /* have to make this 1px since Chrome can't handle paint-order :( */
+    -webkit-text-stroke-width: 1px; /* ALSO, it does not actually do 1px 🙄 */
+    paint-order: stroke fill;
   }
   body {
     background: #491;
@@ -129,33 +131,3 @@
       }
     })
  </script>
-
-
-<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 460 220" preserveAspectRatio="xMidYMid keep">
-  <defs>
-    <filter id="filter" >
-      <!-- COLORS -->
-        <feFlood flood-color="#FFFFFF" result="COLOR_SIDES" />
-      <!-- COLORS END -->
-
-      <!-- STROKE -->
-        <feMorphology operator="dilate" radius="2" in="SourceAlpha" result="STROKE_10" />
-      <!-- STROKE END -->
-
-      <!-- EXTRUDED BEVEL -->
-        <feConvolveMatrix order="8,8" divisor="1"
-          kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1" in="STROKE_10" result="BEVEL_20" />
-
-        <feOffset dx="2" dy="2" in="BEVEL_20" result="BEVEL_25"/>
-        <feComposite operator="out" in="BEVEL_25" in2="STROKE_10" result="BEVEL_30"/>
-        <feComposite in="COLOR_SIDES" in2="BEVEL_30" operator="in" result="BEVEL_40" />
-        <feMerge result="BEVEL_50">
-          <feMergeNode in="BEVEL_40" />
-          <feMergeNode in="SourceGraphic" />
-        </feMerge>
-       <!-- EXTRUDED BEVEL END -->
-
-      <feComposite in="BEVEL_50" operator="in"/>
-    </filter>
-  </defs>
-</svg>

@@ -113,23 +113,23 @@
   </div>
 </div>
 
- <script>
-  const URL = './Holly%20Jolly%20Christmas%20Lyrics%20-%20Burl%20Ives-nVMCUtsmWmQ.mp3'
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
-  const context = new AudioContext()
+<script>
+ const URL = './Holly%20Jolly%20Christmas%20Lyrics%20-%20Burl%20Ives-nVMCUtsmWmQ.mp3'
+ const AudioContext = window.AudioContext || window.webkitAudioContext;
+ const context = new AudioContext()
 
-  window.fetch(URL)
-    .then(response => response.arrayBuffer())
-    .then(arrayBuffer => context.decodeAudioData(arrayBuffer, audioBuffer => {
-      play.disabled = false
-      play.onclick = () => {
-        const source = context.createBufferSource()
-        source.buffer = audioBuffer
-        source.connect(context.destination)
-        source.start()
-        play.classList.add('fucking-chrome')
-        contents.classList.remove('fucking-chrome')
-        contents.classList.add('playing')
-      }
-    }))
- </script>
+ window.fetch(URL)
+   .then(response => response.arrayBuffer())
+   .then(arrayBuffer => context.decodeAudioData(arrayBuffer, audioBuffer => {
+     play.disabled = false
+     play.onclick = () => {
+       const source = context.createBufferSource()
+       source.buffer = audioBuffer
+       source.connect(context.destination)
+       source.start()
+       play.classList.add('fucking-chrome')
+       contents.classList.remove('fucking-chrome')
+       contents.classList.add('playing')
+     }
+   }))
+</script>
